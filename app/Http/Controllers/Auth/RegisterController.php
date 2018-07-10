@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -36,6 +37,13 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        if(Auth::check() && Auth::User()->role->id == 1)
+        {
+            $this->redirectTo = route('admin.dashboard');
+        }else{
+            $this->redirectTo = route('user.dashboard');
+        }
+
         $this->middleware('guest');
     }
 
