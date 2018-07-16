@@ -32,6 +32,7 @@
                                         <th>Name</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -40,6 +41,7 @@
                                         <th>Name</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -49,6 +51,22 @@
                                             <td>{{ $tag->name }}</td>
                                             <td>{{ $tag->created_at }}</td>
                                             <td>{{ $tag->updated_at }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ route('admin.tag.edit', $tag->id) }}" class="btn btn-info btn-small waves-effect">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+
+                                                <button class="btn btn-danger waves-effect" type="button" onclick="deleteTag({{ $tag->id }})">
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+
+                                                <form id="delete-form-{{ $tag->id }}" action="{{ route('admin.tag.destroy', $tag->id) }}" method="POST">
+                                                    <input type="hidden" name="_method" value="DELETE" style="display: none">
+
+                                                        {{ csrf_field() }}
+
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -79,5 +97,13 @@
 
 <!-- Custom Js -->
     <script src="{{ asset('assets/backend/js/pages/tables/jquery-datatable.js') }}"></script>    
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+
+    <script type="text/javascript">
+        function deleteTag(id){
+
+        }
+    </script>
 
 @endpush
