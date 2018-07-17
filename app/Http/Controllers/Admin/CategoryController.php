@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Brian2694\Toastr\Facades\Toastr;
 
 use App\Category;
 use Carbon\Carbon;
@@ -43,9 +44,9 @@ class CategoryController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|unique:categories',
-            
+            'image' => 'mimes:jpeg,png,jpg,JPG,JPEG,PNG'
         ]);
-//'image' => 'mimes:jpeg,png,jpg,JPG,JPEG,PNG'
+
         //get form image
 
         $image = $request->file('image');
@@ -56,7 +57,7 @@ class CategoryController extends Controller
             //make unique name for image
             $currentDate = Carbon::now()->toDateString();
             $imageName = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
-            
+
             //dd($imageName);
             //check if directory exists
 
@@ -67,7 +68,7 @@ class CategoryController extends Controller
 
             //resize image for category and upload
 
-            $category = Image::make($image)->resize(1600,479)->save();
+            $category = Image::make($image)->resize(1600,479)->save($imageName);
             Storage::disk('public')->put('category/'.$imageName,$category);
 
             //check if category slider exists
@@ -79,8 +80,9 @@ class CategoryController extends Controller
 
             //resize image for category slider and upload
 
-            $slider = Image::make($image)->resize(500,333)->save();
-            Storage::disk('public')->put('category/slider'.$imageName, $slider);
+            $slider = Image::make($image)->resize(500,333)->save($imageName);
+            Storage::disk('public')->put('category/slider/'.$imageName, $slider);
+
         }else
         {
             $imageName = 'default.png';
@@ -88,7 +90,7 @@ class CategoryController extends Controller
 
         $category = new Category;
         $category->name = $request->name;
-        $category->sulg = $slug;
+        $category->slug = $slug;
         $category->image = $imageName;
         $category->save();
 
