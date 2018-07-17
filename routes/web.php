@@ -25,6 +25,8 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin', 'middlewa
 
 	Route::resource('tag','TagController');
 
+	Route::resource('category','CategoryController');
+
 });
 
 Route::group(['as'=>'user.', 'prefix'=>'user', 'namespace'=>'User', 'middleware'=>['auth','user'] ], function()
