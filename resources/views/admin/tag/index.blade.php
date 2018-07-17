@@ -102,7 +102,35 @@
 
     <script type="text/javascript">
         function deleteTag(id){
+            const swalWithBootstrapButtons = swal.mixin({
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger',
+              buttonsStyling: false,
+            })
 
+            swalWithBootstrapButtons({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes, delete it!',
+              cancelButtonText: 'No, cancel!',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.value) {
+                event.preventDefault();
+                document.getElementById('delete-form-'+id).submit();
+              } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel
+              ) {
+                swalWithBootstrapButtons(
+                  'Cancelled',
+                  'Your data is safe :)',
+                  'error'
+                )
+              }
+            })
         }
     </script>
 
