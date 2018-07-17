@@ -212,6 +212,24 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+
+        //delete old category image
+        if(Storage::disk('public')->exists('category/'.$category->image))
+        {
+            Storage::disk('public')->delete('category/'.$category->image);
+        }
+
+        //delete old category image
+        if(Storage::disk('public')->exists('category/slider/'.$category->image))
+        {
+            Storage::disk('public')->delete('category/slider/'.$category->image);
+        }
+
+        $category->delete();
+
+        Toastr::success('Category Deleted', 'succes');
+
+        return redirect()->back();
     }
 }
