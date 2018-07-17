@@ -20,7 +20,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    <form action="{{ route('admin.category.update', $category->id) }}" method="POST">
+                    <form action="{{ route('admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
 
                         <input type="hidden" name="_method" value="PUT">
 
@@ -33,7 +33,12 @@
                             </div>
                         </div>
 
-                       
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="file" class="form-control" name="image">
+                            </div>
+                        </div>
+
 
                         <br>
                         <button type="submit" class="btn btn-primary m-t-15 waves-effect">SAVE</button>
@@ -44,7 +49,7 @@
         </div>
     </div>
     <!-- Vertical Layout | With Floating Label -->
-    
+
 </div>
 
 @endsection
