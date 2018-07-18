@@ -52,11 +52,11 @@
                                             <td>{{ $category->created_at }}</td>
                                             <td>{{ $category->updated_at }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-info btn-small waves-effect">
+                                                <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-info btn-sm waves-effect">
                                                     <i class="material-icons">edit</i>
                                                 </a>
 
-                                                <button class="btn btn-danger waves-effect" type="button" onclick="deleteCategory({{ $category->id }})">
+                                                <button class="btn btn-danger btn-sm waves-effect" type="button" onclick="deleteCategory({{ $category->id }})">
                                                     <i class="material-icons">delete</i>
                                                 </button>
 
