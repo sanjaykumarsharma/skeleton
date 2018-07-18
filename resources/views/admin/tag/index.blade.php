@@ -30,6 +30,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
+                                        <th>Post Count</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th>Actions</th>
@@ -39,6 +40,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
+                                        <th>Post Count</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th>Actions</th>
@@ -49,14 +51,15 @@
                                         <tr>
                                             <td>{{ $key + 1}}</td>
                                             <td>{{ $tag->name }}</td>
+                                            <td>{{ $tag->posts->count() }}</td>
                                             <td>{{ $tag->created_at }}</td>
                                             <td>{{ $tag->updated_at }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.tag.edit', $tag->id) }}" class="btn btn-info btn-small waves-effect">
+                                                <a href="{{ route('admin.tag.edit', $tag->id) }}" class="btn btn-info btn-xs waves-effect">
                                                     <i class="material-icons">edit</i>
                                                 </a>
 
-                                                <button class="btn btn-danger waves-effect" type="button" onclick="deleteTag({{ $tag->id }})">
+                                                <button class="btn btn-danger btn-xs waves-effect" type="button" onclick="deleteTag({{ $tag->id }})">
                                                     <i class="material-icons">delete</i>
                                                 </button>
 
