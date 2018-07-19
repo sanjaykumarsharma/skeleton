@@ -119,6 +119,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        if($post->user_id != Auth::id())
+        {
+            Toastr::error('Error', 'Error');
+
+            return redirect()->back();
+        }
         return view('user.post.show', compact('post'));
     }
 
@@ -130,6 +136,13 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if($post->user_id != Auth::id())
+        {
+            Toastr::error('Error', 'Error');
+
+            return redirect()->back();
+        }
+
         $categories = Category::all();
         $tags = Tag::all();
         return view('user.post.edit', compact('post','categories','tags'));
@@ -144,6 +157,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if($post->user_id != Auth::id())
+        {
+            Toastr::error('Error', 'Error');
+
+            return redirect()->back();
+        }
+
         $this->validate($request,[
             'title' => 'required',
             'image' => 'image',
@@ -218,19 +238,27 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
-    {
-        //delete old post image
-        if(Storage::disk('public')->exists('post/'.$post->image))
+    {  
+        if($post->user_id != Auth::id())
         {
-            Storage::disk('public')->delete('post/'.$post->image);
-        }
+            Toastr::error('Error', 'Error');
 
-        $post->categories()->detach();
-        $post->tags()->detach();
-        $post->delete();
+            return redirect()->back();
+        }else{
+    
+            //delete old post image
+            if(Storage::disk('public')->exists('post/'.$post->image))
+            {
+                Storage::disk('public')->delete('post/'.$post->image);
+            }
 
-        Toastr::success('Post Deleted', 'Success');
+            $post->categories()->detach();
+            $post->tags()->detach();
+            $post->delete();
 
-        return redirect()->route('user.post.index');
+            Toastr::success('Post Deleted', 'Success');
+
+            return redirect()->route('user.post.index');
+       }
     }
 }
