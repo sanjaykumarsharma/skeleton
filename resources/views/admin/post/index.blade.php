@@ -35,7 +35,7 @@
                                         <th>Is Approved</th>
                                         <th>Status</th>
                                         <th>Created at</th>
-                                        <th>Updated at</th>
+                                        {{-- <th>Updated at</th> --}}
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -48,7 +48,7 @@
                                         <th>Is Approved</th>
                                         <th>Status</th>
                                         <th>Created at</th>
-                                        <th>Updated at</th>
+                                        {{-- <th>Updated at</th> --}}
                                         <th>Actions</th>
                                     </tr>
                                 </tfoot>
@@ -76,8 +76,12 @@
                                                 
                                             </td>
                                             <td>{{ $post->created_at }}</td>
-                                            <td>{{ $post->updated_at }}</td>
+                                            {{-- <td>{{ $post->updated_at }}</td> --}}
                                             <td class="text-center">
+                                                <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-info btn-xs waves-effect">
+                                                    <i class="material-icons">visibility</i>
+                                                </a>
+
                                                 <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-info btn-xs waves-effect">
                                                     <i class="material-icons">edit</i>
                                                 </a>
