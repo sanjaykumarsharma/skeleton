@@ -34,5 +34,7 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin', 'middlewa
 Route::group(['as'=>'user.', 'prefix'=>'user', 'namespace'=>'User', 'middleware'=>['auth','user'] ], function()
 {
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
+	
+	Route::resource('post','PostController');
 });
 

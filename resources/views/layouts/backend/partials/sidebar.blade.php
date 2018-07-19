@@ -76,6 +76,14 @@
                             <span>dashboard</span>
                         </a>
                     </li>
+
+                    <li class="{{ Request::is('user/post*') ? 'active' : '' }}">
+                        <a href="{{ route('user.post.index') }}">
+                            <i class="material-icons">library_books</i>
+                            <span>Posts</span>
+                        </a>
+                    </li>
+
                 @endif
 
 
