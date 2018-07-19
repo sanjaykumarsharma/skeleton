@@ -12,17 +12,25 @@
     <!-- Vertical Layout | With Floating Label -->
     <a href="{{ route('admin.post.index') }}" class="btn btn-danger waves-effect">Back</a>
 
-    @if($post->is_approved == false)
-        <button type="button" class="btn btn-success pull-right">
-            <i class="material-icons">done</i>
-            <span>Approve</span>
+    
+        <button type="button" class="btn pull-right waves-effect {{ $post->is_approved == true ? 'btn-danger' : 'btn-success' }}" onclick="approvePost({{ $post->id }})">
+            
+            @if($post->is_approved == false)
+                <i class="material-icons">done</i>
+                <span>Approve</span>
+            @else
+                <i class="material-icons">clear</i>
+                <span>Un-approve</span>
+            @endif
+
         </button>
-    @else
-        <button type="button" class="btn btn-success pull-right" disabled>
-            <i class="material-icons">done</i>
-            <span>Approved</span>
-        </button>
-    @endif
+
+        <form action="{{ route('admin.post.approve', $post->id) }}" method="POST" id="approval-form" style="display: none">
+            
+            <input type="hidden" name="_method" value="PUT">
+            {{ csrf_field() }}
+
+        </form>
 
     <br>
     <br>
@@ -122,4 +130,40 @@
             tinyMCE.baseURL = '{{ asset('assets/backend/plugins/tinymce') }}';
         });
      </script>
+
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+
+    <script type="text/javascript">
+        function approvePost(id){
+            const swalWithBootstrapButtons = swal.mixin({
+              confirmButtonClass: 'btn btn-success',
+              cancelButtonClass: 'btn btn-danger',
+              buttonsStyling: false,
+            })
+
+            swalWithBootstrapButtons({
+              title: 'Are you sure?',
+              text: "You want to change the status!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Yes, change the status!',
+              cancelButtonText: 'No, cancel!',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.value) {
+                event.preventDefault();
+                document.getElementById('approval-form').submit();
+              } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel
+              ) {
+                swalWithBootstrapButtons(
+                  'Cancelled',
+                  'the post status is unchanged :)',
+                  'info'
+                )
+              }
+            })
+        }
+    </script>
 @endpush
