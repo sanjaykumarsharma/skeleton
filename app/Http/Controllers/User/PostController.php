@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\User;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewUserPost;
 
 
 class PostController extends Controller
@@ -105,6 +108,12 @@ class PostController extends Controller
 
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
+
+        // sending mail after user post creation
+
+        $users = User::where('role_id', 1)->get();
+        Notification::send($users, new NewUserPost($post));
+
 
         Toastr::success('Post created', 'Success');
 

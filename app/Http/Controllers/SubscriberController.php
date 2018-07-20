@@ -22,7 +22,7 @@ class SubscriberController extends Controller
     	$subscriber->email = $request->email;
     	$subscriber->save();
 
-    	Toastr::success('Subscription Successfull', 'succes');
+    	Toastr::success('Subscription Successfull', 'Successfully');
 
     	return redirect()->back();
 

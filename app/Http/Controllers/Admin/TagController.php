@@ -50,7 +50,7 @@ class TagController extends Controller
         $tag->slug = str_slug($request->name);
         $tag->save();
 
-        Toastr::success('Tag Saved', 'succes');
+        Toastr::success('Tag Saved', 'Successfully');
 
         return redirect()->route('admin.tag.index');
 
@@ -101,7 +101,7 @@ class TagController extends Controller
         $tag->slug = str_slug($request->name);
         $tag->save();
 
-        Toastr::success('Tag Updated', 'succes');
+        Toastr::success('Tag Updated', 'Successfully');
 
         return redirect()->route('admin.tag.index');
 
@@ -117,7 +117,7 @@ class TagController extends Controller
     {
         Tag::find($id)->delete();
 
-        Toastr::success('Tag Deleted', 'succes');
+        Toastr::success('Tag Deleted', 'Successfully');
 
         return redirect()->back();
 
