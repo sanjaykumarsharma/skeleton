@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('/subscriber','SubscriberController@store')->name('subscriber.store');
 
@@ -26,9 +22,7 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin', 'middlewa
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
 
 	Route::resource('tag','TagController');
-
 	Route::resource('category','CategoryController');
-
 	Route::resource('post','PostController');
 
 	Route::put('/post/{id}/approve', 'PostController@approval')->name('post.approve');
@@ -43,7 +37,6 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin', 'middlewa
 Route::group(['as'=>'user.', 'prefix'=>'user', 'namespace'=>'User', 'middleware'=>['auth','user'] ], function()
 {
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
-	
 	Route::resource('post','PostController');
 });
 
