@@ -32,6 +32,10 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin', 'middlewa
 	Route::get('/subscriber','SubscriberController@index')->name('subscriber.index');
 	Route::delete('/subscriber/{id}','SubscriberController@destroy')->name('subscriber.destroy');
 
+	//settings
+	Route::get('/settings', 'SettingsController@index')->name('settings.index');
+	Route::put('/settings/profile-update', 'SettingsController@profileUpdate')->name('settings.profile-update');
+
 });
 
 Route::group(['as'=>'user.', 'prefix'=>'user', 'namespace'=>'User', 'middleware'=>['auth','user'] ], function()

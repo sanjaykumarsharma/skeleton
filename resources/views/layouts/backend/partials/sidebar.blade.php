@@ -79,6 +79,15 @@
                         </a>
                     </li>
 
+                    <div class="header">System</div>
+
+                    <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
+                        <a href="{{ route('admin.settings.index') }}">
+                            <i class="material-icons">settings</i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+
 
                 @endif
 
