@@ -46,7 +46,6 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="update_profile">
-                                {{-- <form class="form-horizontal"> --}}
                                 <form action="{{ route('admin.settings.profile-update') }}" method="POST" enctype="multipart/form-data">	
                                 	<input type="hidden" name="_method" value="PUT">
     								{{ csrf_field() }}
@@ -112,13 +111,56 @@
 	                            </form>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
-                                <b>Profile Content</b>
-                                <p>
-                                    Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                    Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                    pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                    sadipscing mel.
-                                </p>
+                                <form action="{{ route('admin.settings.password-update') }}" method="POST" >	
+                                	<input type="hidden" name="_method" value="PUT">
+    								{{ csrf_field() }}
+
+ 	                                <div class="row clearfix">
+	                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+	                                        <label for="old_password">Old Password</label>
+	                                    </div>
+	                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+	                                        <div class="form-group">
+	                                            <div class="form-line">
+	                                                <input type="password" id="old_password" class="form-control" placeholder="Enter your Old Password" name="old_password" >
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+
+	                                <div class="row clearfix">
+	                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+	                                        <label for="password">New Password</label>
+	                                    </div>
+	                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+	                                        <div class="form-group">
+	                                            <div class="form-line">
+	                                                <input type="password" id="password" class="form-control" placeholder="Enter your New Password" name="password" >
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+
+	                                <div class="row clearfix">
+	                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+	                                        <label for="password_confirmation">Confirm Password</label>
+	                                    </div>
+	                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+	                                        <div class="form-group">
+	                                            <div class="form-line">
+	                                                <input type="password" id="password_confirmation" class="form-control" placeholder="Enter your New Password Again" name="password_confirmation" >
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                </div>
+
+	                                
+	                                <div class="row clearfix">
+	                                    <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+	                                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Update</button>
+	                                    </div>
+	                                </div>
+	                            </form>
                             </div>
                         </div>
                     </div>
