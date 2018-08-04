@@ -56,7 +56,7 @@
 
                             <div class="blog-info">
 
-                                <h4 class="title"><a href="#"><b>{{ $post->title }}</b></a></h4>
+                                <h4 class="title"><a href="{{ route('post.details',$post->slug) }}"><b>{{ $post->title }}</b></a></h4>
 
                                 <ul class="post-footer">
                                     <li><a href="#"><i class="ion-heart"></i>57</a></li>
